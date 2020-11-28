@@ -1,0 +1,12 @@
+{
+  "name": "expo-posts",
+  "displayName": "expo-posts",
+  "expo": {
+    "name": "expo-posts",
+    "slug": "expo-posts",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
