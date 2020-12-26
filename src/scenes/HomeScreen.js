@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Alert, Button, View } from 'react-native';
+import { ActivityIndicator, Alert, Button, ScrollView, TextInput, View } from 'react-native';
 import PostCard from '_molecules/PostCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '_store/actions/posts/posts';
@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation, route }) => {
         // if (isLoading) Alert.alert('success');
     }, [isLoading]);
     return (
-        <View>
+        <ScrollView>
             {!!isLoading && <ActivityIndicator />}
             <PostCard
                 title={'Test title'}
@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation, route }) => {
                     navigation.navigate({ name: SCREENS.TEST, params: { test: 24, test1: 43 }, key: 0 });
                 }}
             />
-        </View>
+        </ScrollView>
     );
 };
 
