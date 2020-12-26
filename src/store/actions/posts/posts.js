@@ -4,3 +4,10 @@ export const getPosts = () => ({
     method: 'GET',
     query: {},
 });
+
+export const sendPost = post => ({
+    type: 'SEND_POST',
+    rest: '/posts/',
+    method: 'POST',
+    query: {},
+});
