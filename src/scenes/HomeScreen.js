@@ -9,7 +9,7 @@ const HomeScreen = ({ navigation, route }) => {
     const { isLoading } = useSelector(state => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getPosts());
+        // dispatch(getPosts());
     }, []);
     useEffect(() => {
         // if (isLoading) Alert.alert('success');
@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation, route }) => {
                 title={'test'}
                 onPress={() => {
                     // navigation.navigate(SCREENS.TEST, { test: 42, test1: 43 });
-                    navigation.navigate({ name: SCREENS.TEST, params: { test: 24, test1: 43 }, key: 0 });
+                    navigation.navigate({ name: SCREENS.MAIN.TEST, params: { test: 24, test1: 43 }, key: 0 });
                 }}
             />
         </ScrollView>

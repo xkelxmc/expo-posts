@@ -1,4 +1,10 @@
 export const SCREENS = {
-    HOME: 'HomeScreen',
-    TEST: 'TestScreen',
+    AUTH: {
+        LOGIN: 'LoginScreen',
+        PIN_CODE: 'PinCodeAuthScreen',
+    },
+    MAIN: {
+        HOME: 'HomeScreen',
+        TEST: 'TestScreen',
+    },
 };
