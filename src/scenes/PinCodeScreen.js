@@ -21,6 +21,17 @@ const PinCodeScreen = () => {
     return (
         <View style={[{ flex: 1 }]}>
             <PINCode
+                colorPassword={'#424242'}
+                stylePinCodeColorTitle={'#424242'}
+                stylePinCodeButtonCircle={{ backgroundColor: 'yellow' }}
+                stylePinCodeDeleteButtonColorHideUnderlay={'#424242'}
+                stylePinCodeDeleteButtonColorShowUnderlay={'#424242'}
+                stylePinCodeColorSubtitle={'#424242'}
+                colorPasswordError={'#9DAFC8'}
+                colorPasswordEmpty={'#686868'}
+                numbersButtonOverlayColor={'#9f9f9f'}
+                stylePinCodeButtonNumber={'#212121'}
+                stylePinCodeButtonNumberPressed={'#ffffff'}
                 titleChoose={'1 - Enter a PIN Code'}
                 titleConfirm={'2 - Confirm your PIN Code'}
                 titleConfirmFailed={'Your entries did not match'}
