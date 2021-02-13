@@ -1,38 +1,66 @@
-import React, { useEffect } from 'react';
-import { ActivityIndicator, Alert, Button, ScrollView, TextInput, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, FlatList, View } from 'react-native';
 import PostCard from '_molecules/PostCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts } from '_store/actions/posts/posts';
 import { SCREENS } from '_utils/screens';
+import PostSkeleton from '_atoms/skeletons/PostSkeleton';
+import SvgComponent from '_atoms/SvgExample';
 
 const HomeScreen = ({ navigation, route }) => {
-    const { isLoading } = useSelector(state => state.posts);
+    const [refreshing, setRefreshing] = useState(false);
+    const { isLoading, posts } = useSelector(state => state.posts);
     const dispatch = useDispatch();
     useEffect(() => {
-        // dispatch(getPosts());
+        dispatch(getPosts());
     }, []);
+    const renderPost = ({ item }) => {
+        if (isLoading) {
+            return <PostSkeleton />;
+        }
+        return (
+            <PostCard
+                title={item.title}
+                body={item.body}
+                likes={item.userLikes.length}
+                dislikes={item.userDislikes.length}
+            />
+        );
+    };
+    const onRefresh = () => {
+        setRefreshing(true);
+        dispatch(getPosts());
+    };
     useEffect(() => {
-        // if (isLoading) Alert.alert('success');
+        if (!isLoading) {
+            setRefreshing(false);
+        }
     }, [isLoading]);
     return (
-        <ScrollView>
-            {!!isLoading && <ActivityIndicator />}
-            <PostCard
-                title={'Test title'}
-                body={
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+        <View style={[{ flex: 1 }]}>
+            <FlatList
+                data={!isLoading > 0 ? posts : [1, 2, 3]}
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                ListHeaderComponent={
+                    <>
+                        <Button
+                            title={'test'}
+                            onPress={() => {
+                                // navigation.navigate(SCREENS.TEST, { test: 42, test1: 43 });
+                                navigation.navigate({
+                                    name: SCREENS.MAIN.TEST,
+                                    params: { test: 24, test1: 43 },
+                                    key: 0,
+                                });
+                            }}
+                        />
+                    </>
                 }
-                likes={35}
-                dislikes={10}
+                renderItem={renderPost}
+                keyExtractor={(item, index) => (!isLoading ? item._id : index.toString())}
             />
-            <Button
-                title={'test'}
-                onPress={() => {
-                    // navigation.navigate(SCREENS.TEST, { test: 42, test1: 43 });
-                    navigation.navigate({ name: SCREENS.MAIN.TEST, params: { test: 24, test1: 43 }, key: 0 });
-                }}
-            />
-        </ScrollView>
+        </View>
     );
 };
 
